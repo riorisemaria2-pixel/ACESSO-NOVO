@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desbloquear Conteúdo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#0f0f0f;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+.container{
+  background:#1c1c1c;
+  padding:25px;
+  border-radius:20px;
+  width:95%;
+  max-width:420px;
+}
+
+h1{
+  color:#fff;
+  text-align:center;
+  font-size:20px;
+}
+
+.sub{
+  text-align:center;
+  color:#aaa;
+  font-size:12px;
+  margin-bottom:20px;
+}
+
+.progress{
+  height:6px;
+  background:#333;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:15px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:#f5c518;
+  transition:.3s;
+}
+
+.task{
+  background:#262626;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:10px;
+  cursor:pointer;
+  position:relative;
+}
+
+.task.done{
+  background:#123c23;
+}
+
+.task span{
+  color:#fff;
+  font-size:14px;
+}
+
+.status{
+  float:right;
+  color:#999;
+  font-size:12px;
+}
+
+.loading-bar{
+  position:absolute;
+  bottom:0;
+  left:0;
+  height:3px;
+  width:0%;
+  background:#f5c518;
+  transition:2s linear;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:40px;
+  background:#333;
+  color:#777;
+  font-weight:600;
+}
+
+button.active{
+  background:#f5c518;
+  color:#000;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>🔓 Você está a poucos passos</h1>
+<p class="sub">Complete tudo para liberar</p>
+
+<div class="progress">
+<div class="progress-bar" id="bar"></div>
+</div>
+
+<div class="task" data-link="https://www.youtube.com/@isacmodstv">
+<span>📺 Se inscrever</span>
+<span class="status">Pendente</span>
+<div class="loading-bar"></div>
+</div>
+
+<div class="task" data-link="https://www.youtube.com/@isacmodstv2">
+<span>📺 Canal 2</span>
+<span class="status">Pendente</span>
+<div class="loading-bar"></div>
+</div>
+
+<div class="task" data-link="https://youtu.be/jLzm_sGO4pE?si=rrOb6NjXdD1H-WNF">
+<span>👍 Like vídeo</span>
+<span class="status">Pendente</span>
+<div class="loading-bar"></div>
+</div>
+
+<div class="task" data-link="https://youtu.be/WNSuoZYLp34?si=pkn2Vx7FcpmaSfGG">
+<span>👍 Like vídeo 2</span>
+<span class="status">Pendente</span>
+<div class="loading-bar"></div>
+</div>
+
+<div class="task" data-link="https://youtu.be/jLzm_sGO4pE?si=rrOb6NjXdD1H-WNF">
+<span>💬 Comentar</span>
+<span class="status">Pendente</span>
+<div class="loading-bar"></div>
+</div>
+
+<div class="task" data-link="https://chat.whatsapp.com/Bye9CWnyog5CggS0y6RxXA">
+<span>👥 Grupo WhatsApp</span>
+<span class="status">Pendente</span>
+<div class="loading-bar"></div>
+</div>
+
+<button id="btn" onclick="unlock()">🔒 Concluído</button>
+</div>
+
+<script>
+let done = 0;
+const total = 6;
+
+document.querySelectorAll(".task").forEach(task=>{
+  task.onclick = ()=>{
+    if(task.classList.contains("done")) return;
+
+    window.open(task.dataset.link,"_blank");
+
+    let status = task.querySelector(".status");
+    let bar = task.querySelector(".loading-bar");
+
+    status.innerText="Verificando...";
+    bar.style.width="100%";
+
+    setTimeout(()=>{
+      task.classList.add("done");
+      status.innerText="✔ Feito";
+      done++;
+      update();
+    },2000);
+  }
+});
+
+function update(){
+  document.getElementById("bar").style.width = (done/total*100)+"%";
+
+  if(done===total){
+    let btn = document.getElementById("btn");
+    btn.classList.add("active");
+    btn.innerText="🔓 Liberar Acesso";
+  }
+}
+
+function unlock(){
+  if(done===total){
+    // VAI DIRETO PRO LINK FINAL
+    window.location.href = "https://suaads.com/8iweaw";
+  } else {
+    alert("Falta completar!");
+  }
+}
+</script>
+
+</body>
+</html>
